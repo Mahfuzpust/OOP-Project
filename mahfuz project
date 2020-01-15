@@ -1,0 +1,596 @@
+#include "iGraphics.h"
+#include<iostream>
+using namespace std;
+
+//:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::Idraw Here::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::://
+int p1 = 10, n, n1;
+int r = 0, g = 255, b = 255;
+int x = 890, y = 700;
+int lx = 550, ly = 70;
+int ex = 100, ey = 650, ex1 = 50, ey1 = 800, ed = 700, ex2 = 500, ey2 = 670;
+int d = 20, t, t1, t2, t3, t4, t5, t6;
+char s3[100], ans[100], endd[100] = "0";
+char m1[10];
+int ana;
+bool bn = true;
+
+int mposx;
+int mposy;
+
+int mx = 0;
+int my = 0;
+int line = 0;
+int picmove = 0;
+bool d1 = true;
+//int circlemove = 0;
+
+
+int musicOn = true;
+int aMahfuzX = 0;
+int aMahfuzY = 0;
+int aMahfuzArray = 0;
+int aMahfuzArray1 = 0;
+
+int gameState = -1;
+
+char img[5][25] = { "img\\mmm.front.bmp", "img\\start.bmp", "img\\menu.bmp", "img\\exit.bmp", "img\\help1.bmp" };
+char front[4][20] = { "img\\mm.front.bmp" };
+char resume[4][20] = { "img\\resume.bmp" };
+char pause[4][20] = { "img\\pause.bmp" };
+char back[4][20] = { "img\\back1.bmp" };
+char m[4][20] = { "img\\made.bmp" };
+char back1[4][20] = { "img\\abc.right.bmp", "img\\ab.right.bmp " };
+char back2[4][20] = { "img\\ml.left.bmp", "img\\ms.left.bmp" };
+
+
+
+void iDraw()
+{
+	iClear();
+
+	if (gameState == -1)
+	{
+		iShowBMP(0, 0, front[0]);
+		iSetColor(0, 0, 255);
+		iText(50, 50, "Loading...", GLUT_BITMAP_TIMES_ROMAN_24);
+		iFilledRectangle(50, 20, 70 + line, 20);
+
+	}
+
+	if (gameState == 0)
+	{
+
+		iShowBMP(0, 0, img[0]);
+		iShowBMP(50, 75, img[1]);
+		iShowBMP(300, 75, img[2]);
+		iShowBMP(550, 75, img[3]);
+		iShowBMP(780, 500, img[4]);
+
+
+		//iText(50, 50, "Loading...", GLUT_BITMAP_TIMES_ROMAN_24);
+		//iFilledRectangle(50, 20, 70 + line, 20);
+
+		//iShowBMP(150, 600, img[0]);
+	}
+
+	else if (gameState == 1)
+	{
+
+		//iShowBMP(0+picmove, 10, back1[0]);
+		//iShowBMP(aMahfuzX+picmove, aMahfuzY, back1[aMahfuzArray]);
+		//iSetColor(0, 0, 0);
+
+		iClear();
+		//iSetColor(255, 255, 255);
+		//iFilledRectangle(0, 0, 900, 600);
+
+		iShowBMP(770, 300, pause[0]);
+
+		iShowBMP(770, 230, resume[0]);
+
+		iShowBMP(770, 150, back[0]);
+
+		iSetColor(r, g, b);
+		iFilledCircle(ex, ey, 10, 1000);
+		iFilledRectangle(ex2, ey2, 20, 30);
+		if (n1 >= 10){
+			iSetColor(255, 0, 0);
+			iFilledCircle(ex1, ey1, 20, 1000);
+		}
+
+		iSetColor(r, g, b);
+		iText(730, 500, ans, GLUT_BITMAP_TIMES_ROMAN_24);
+		iText(700, 550, "SCORE", GLUT_BITMAP_TIMES_ROMAN_24);
+		iText(730, 400, m1, GLUT_BITMAP_TIMES_ROMAN_24);
+		iText(705, 450, "LEVEL", GLUT_BITMAP_TIMES_ROMAN_24);
+
+		//  iShowBMP(0 + picmove, 0, back1[0]);
+		if (d1)iShowBMP2(aMahfuzX + picmove, aMahfuzY, back1[aMahfuzArray], 0);
+
+		if (!d1)iShowBMP2(aMahfuzX + picmove, aMahfuzY, back2[aMahfuzArray1], 0);
+		///iSetColor(0, 0, 0);
+		///cout << ans << endl;
+
+		//iFilledCircle(450, 900+circlemove, 10, 1000);
+		//iFilledRectangle()
+		//iText(250, 150, "CLICK ANYWHERE TO BACK.......", GLUT_BITMAP_TIMES_ROMAN_24);
+		//iText(700, 400, "PlayGame", GLUT_BITMAP_TIMES_ROMAN_24);
+
+
+	}
+	else if (gameState == 2)
+	{
+
+		//iShowBMP(0, 0, back1[0]);//about
+		iShowBMP(0, 0, m[0]);
+		iShowBMP(770, 530, back[0]);
+
+		/*
+		iSetColor(0, 0, 255);
+		iText(150, 540, "Md Mahfuzur Rahman", GLUT_BITMAP_TIMES_ROMAN_24);
+		iText(150, 510, "Student id : 180134", GLUT_BITMAP_TIMES_ROMAN_24);
+		iText(150, 480, "Department of CSE", GLUT_BITMAP_TIMES_ROMAN_24);
+
+		iSetColor(0, 0, 0);
+		iText(150, 430, "MD ANANDA MIA", GLUT_BITMAP_TIMES_ROMAN_24);
+		iText(150, 400, "Student id : 180135", GLUT_BITMAP_TIMES_ROMAN_24);
+		iText(150, 370, "Department of CSE", GLUT_BITMAP_TIMES_ROMAN_24);
+
+		iSetColor(255, 255, 0);
+		iText(150, 320, "MD HANZALA SARKER", GLUT_BITMAP_TIMES_ROMAN_24);
+		iText(150, 290, "Student id : 180136", GLUT_BITMAP_TIMES_ROMAN_24);
+		iText(150, 260, "Department of CSE", GLUT_BITMAP_TIMES_ROMAN_24);
+
+		iSetColor(255, 0, 0);
+		iText(250, 150, "CLICK ANYWHERE TO BACK.......", GLUT_BITMAP_TIMES_ROMAN_24);
+		*/
+	}
+	else if (gameState == 3)
+	{
+		//iShowBMP(0, 0, m[0]);
+		exit(1);
+	}
+	else if (gameState == 4)
+	{
+		iSetColor(255, 0, 0);
+
+		//iShowBMP(770, 150, back[0]);
+
+		//iShowBMP(200, 300, k[0]);
+		iText(340, 400, "GAMING ENDED", GLUT_BITMAP_TIMES_ROMAN_24);
+		iText(420, 320, endd, GLUT_BITMAP_TIMES_ROMAN_24);
+		iText(355, 350, "YOUR SCORE", GLUT_BITMAP_TIMES_ROMAN_24);
+
+	}
+	else if (gameState == 5)
+	{
+		iSetColor(255, 0, 0);
+		iText(300, 550, "GAMING INTRODUCTION", GLUT_BITMAP_TIMES_ROMAN_24);
+		iShowBMP(770, 150, back[0]);
+
+		iText(10, 500, "# If You will press left buttom, then the man will move the left side.", GLUT_BITMAP_TIMES_ROMAN_24);
+		iText(10, 450, "# If You will press right buttom, then the man will move the right side.", GLUT_BITMAP_TIMES_ROMAN_24);
+		iText(10, 400, "# If You will press top buttom, then the music will stop.", GLUT_BITMAP_TIMES_ROMAN_24);
+		iText(10, 350, "### If the bulet/bom will put down the man, then the man will died & game over.", GLUT_BITMAP_TIMES_ROMAN_24);
+		iText(10, 300, "# if you will select the pause buttom, then the game will stop.", GLUT_BITMAP_TIMES_ROMAN_24);
+		iText(10, 250, "# if you will select the resume buttom, then the game will continue.", GLUT_BITMAP_TIMES_ROMAN_24);
+		iText(10, 200, "# if you will select the back buttom, then you will go to the previous page.", GLUT_BITMAP_TIMES_ROMAN_24);
+		////	iText(10, 350, "# When the bulet/bom put down the man, then the is Injured/died.", GLUT_BITMAP_TIMES_ROMAN_24);
+
+	}
+
+
+
+}
+
+
+
+
+
+/*function iMouseMove() is called when the user presses and drags the mouse.
+(mx, my) is the position where the mouse pointer is.
+*/
+
+
+void iMouseMove(int mx, int my)
+{
+
+}
+//*******************************************************************ipassiveMouse***********************************************************************//
+void iPassiveMouseMove(int mx, int my)
+{
+
+}
+
+void iMouse(int button, int state, int mx, int my)
+{
+
+	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
+	{
+		if (gameState == 0)
+		{
+
+			if (mx >= 50 && my >= 75 && mx <= 250 && my <= 225)
+				gameState = 1;
+
+			else if (mx >= 300 && my >= 75 && mx <= 500 && my <= 225)
+				gameState = 2;
+
+			else if (mx >= 550 && my >= 75 && mx <= 750 && my <= 225)
+				gameState = 3;
+
+
+			else if (mx >= 780 && my >= 500 && mx <= 880 && my <= 550)
+				gameState = 5;
+
+
+		}
+		else if (gameState == 1)
+		{
+
+			if (mx >= 770 && my >= 150 && mx <= 870 && my <= 200)
+			{
+				gameState = 0;
+			}
+
+			if (mx >= 770 && my >= 230 && mx <= 870 && my <= 280)
+			{
+				if (bn == false)
+					bn = true;
+			}
+			//pause
+			if (mx >= 770 && my >= 300 && mx <= 870 && my <= 350){
+				if (bn == true)
+					bn = false;
+			}
+		}
+		else if (gameState == 2)
+		{
+			if (mx >= 770 && my >= 530 && mx <= 870 && my <= 590)
+			{
+				gameState = 0;
+			}
+
+		}
+
+		else if (gameState == 5)
+		{
+			if (mx >= 770 && my >= 150 && mx <= 870 && my <= 200)
+			{
+				gameState = 0;
+			}
+		}
+	}
+
+	if (button == GLUT_RIGHT_BUTTON && state == GLUT_DOWN)
+	{
+
+	}
+}
+
+/*
+function iKeyboard() is called whenever the user hits a key in keyboard.
+key- holds the ASCII value of the key pressed.
+*/
+
+
+void iKeyboard(unsigned char key)
+{
+	if (key == 'b')
+	{
+
+	}
+
+
+}
+
+/*
+function iSpecialKeyboard() is called whenver user hits special keys like-
+function keys, home, end, pg up, pg down, arraows etc. you have to use
+appropriate constants to detect them. A list is:
+GLUT_KEY_F1, GLUT_KEY_F2, GLUT_KEY_F3, GLUT_KEY_F4, GLUT_KEY_F5, GLUT_KEY_F6,
+GLUT_KEY_F7, GLUT_KEY_F8, GLUT_KEY_F9, GLUT_KEY_F10, GLUT_KEY_F11, GLUT_KEY_F12,
+GLUT_KEY_LEFT, GLUT_KEY_UP, GLUT_KEY_RIGHT, GLUT_KEY_DOWN, GLUT_KEY_PAGE UP,
+GLUT_KEY_PAGE DOWN, GLUT_KEY_HOME, GLUT_KEY_END, GLUT_KEY_INSERT
+*/
+void iSpecialKeyboard(unsigned char key)
+{
+
+
+	if (key == GLUT_KEY_UP)
+	{
+		if (musicOn)
+		{
+			musicOn = false;
+			PlaySound(0, 0, 0);
+		}
+		else
+		{
+			musicOn = true;
+			PlaySound("music\\victory.wav", NULL, SND_LOOP | SND_ASYNC);
+		}
+	}
+	if (bn == true){
+		if (key == GLUT_KEY_RIGHT)
+		{
+			if (picmove <= 750)
+			{
+				d1 = true;
+				picmove += 50;
+				aMahfuzArray++;
+				aMahfuzArray %= 2;
+			}
+		}
+
+		if (key == GLUT_KEY_LEFT)
+		{
+			//aMahfuzArray = 2;
+			if (picmove >= 50)
+			{
+				picmove -= 50;
+				d1 = false;
+				aMahfuzArray1++;
+				aMahfuzArray1 %= 2;
+
+			}
+
+		}
+	}
+
+}
+/*
+void circleMove()
+{
+circlemove -= 10;
+}
+void lineMove()
+{
+if (line <= 900 - 150)
+line += 10;
+else
+gameState = 1;
+}
+*/
+
+void change()
+{
+	if (bn == true){
+
+		if (gameState == 1)
+			ey -= p1;
+		if (ey <= 200 && ex >= picmove && ex <= (picmove + 125))
+		{
+			int len = strlen(ans);
+			if (gameState != 4 && len != 0){
+				int p = 0;
+				int i;
+
+				for (i = 0; i < len; ++i)
+				{
+					endd[p++] = ans[i];
+				}
+				endd[len] = '\0';
+			}
+			gameState = 4;
+		}
+		if (n1 == 0)
+		{
+			m1[0] = '1';
+		}
+		if (n1 >= 5){
+			ey2 -= 13;
+			if (ey2 <= 200 && ex2 >= picmove && ex2 <= (picmove + 125))
+			{
+				int len = strlen(ans);
+				if (gameState != 4 && len != 0){
+					int p = 0;
+					int i;
+
+					for (i = 0; i < len; ++i)
+					{
+						endd[p++] = ans[i];
+					}
+					endd[len] = '\0';
+				}
+				gameState = 4;
+
+			}
+		}
+		if (n1 == 5)
+		{
+			m1[0] = '2';
+		}
+		if (n1 == 15)
+		{
+			m1[0] = '3';
+		}
+		if (n1 == 40)
+		{
+			m1[0] = '4';
+		}
+		if (n1 == 60)
+		{
+			m1[0] = '5';
+		}
+		if (n1 >= 15){
+			ey1 -= 8;
+			if (ey1 <= 200 && ex1 >= picmove && ex1 <= (picmove + 125))
+			{
+				int len = strlen(ans);
+				if (gameState != 4 && len != 0){
+					int p = 0;
+					int i;
+
+					for (i = 0; i < len; ++i)
+					{
+						endd[p++] = ans[i];
+					}
+					endd[len] = '\0';
+				}
+				gameState = 4;
+			}
+		}
+
+
+		if ((ey + 15) <= 0 || (ey1 + 15) <= 0 || (ey2 + 15) <= 0){
+
+			if (ey + 15 <= 0){
+				ey = y;
+				//ex += ed;
+				ex = rand();
+				ex %= 900;
+				if (ex - 10 < 0)ex = 10;
+				if (ex + 10 >= 900)ex = 890;
+				n1++;
+				n = n1;
+				int i = 0;
+				for (i = 0; n > 0; i++){
+					s3[i] = (n % 10) + '0';
+					n = n / 10;
+				}
+				s3[i] = '\0';
+				int j = 0;
+				int len = strlen(s3);
+
+				for (i = len - 1; i >= 0; i--)
+				{
+					ans[j++] = s3[i];
+				}
+				ans[len] = '\0';
+			}
+
+			if (ey2 + 15 <= 0){
+				ey2 = y;
+				//ex += ed;
+				ex2 = rand();
+				ex2 %= 850;
+				if (ex2 - 10 < 0)ex2 = 20;
+				if (ex2 + 10 >= 900)ex2 = 590;
+				n1++;
+				n = n1;
+				int i = 0;
+				for (i = 0; n > 0; i++){
+					s3[i] = (n % 10) + '0';
+					n = n / 10;
+				}
+				s3[i] = '\0';
+				int j = 0;
+				int len = strlen(s3);
+
+				for (i = len - 1; i >= 0; i--)
+				{
+					ans[j++] = s3[i];
+				}
+				ans[len] = '\0';
+			}
+
+			if ((ey1 + 15) <= 0){
+				ey1 = y;
+				//ex += ed;
+				ex1 = rand();
+				ex1 %= 900;
+				if (ex1 - 10 < 0)ex = 20;
+				if (ex1 + 10 >= 900)ex1 = 600;
+				n1++;
+				n = n1;
+				int i = 0;
+				for (i = 0; n > 0; i++){
+					s3[i] = (n % 10) + '0';
+					n = n / 10;
+				}
+				s3[i] = '\0';
+				int j = 0;
+				int len = strlen(s3);
+
+				for (i = len - 1; i >= 0; i--)
+				{
+					ans[j++] = s3[i];
+				}
+				ans[len] = '\0';
+			}
+
+		}
+
+		if (n1 == 1)
+		{
+			iPauseTimer(t);
+			iResumeTimer(t1);
+			r = 0;
+		}
+		else if (n1 == 10)
+		{
+			iPauseTimer(t1);
+			iResumeTimer(t2);
+			r = 255;
+			b = 0;
+		}
+		else if (n1 == 15)
+		{
+			iPauseTimer(t2);
+			iResumeTimer(t3);
+			g = 0;
+		}
+		else if (n1 == 30)
+		{
+			iPauseTimer(t3);
+			iResumeTimer(t4);
+			r = 0;
+			b = 255;
+		}
+		else if (n1 == 50)
+		{
+			iPauseTimer(t4);
+			iResumeTimer(t5);
+			r = 0;
+			b = 255;
+		}
+	}
+
+
+}
+void move()
+{
+
+	if (line <= 750)
+	{
+		line += 10;
+
+	}
+	else
+	{
+		gameState = 0;
+		iPauseTimer(t6);
+	}
+}
+
+int main()
+{
+	//if (gameState == 1)
+
+	t6 = iSetTimer(30, move);
+	t = iSetTimer(50, change);
+
+	t1 = iSetTimer(35, change);
+	iPauseTimer(t1);
+	t2 = iSetTimer(25, change);
+	iPauseTimer(t2);
+	t3 = iSetTimer(20, change);
+	iPauseTimer(t3);
+	t4 = iSetTimer(19, change);
+	iPauseTimer(t4);
+	t5 = iSetTimer(18, change);
+	iPauseTimer(t5);
+
+	///srand((unsigned)time(NULL));
+
+	if (musicOn)
+		PlaySound("music\\victory.wav", NULL, SND_LOOP | SND_ASYNC);
+
+	//iSetTimer(40, circleMove);
+
+	iInitialize(900, 600, "LIFE SAVING");
+	///updated see the documentations
+
+	iStart();
+	return 0;
+}
